@@ -36,15 +36,15 @@ def monitoring(ind, shap_values, features, feature_names=None, ax=None, show=Tru
 
     feature_names : list
         Names of the features (length # features)
-        
+
     ax : matplotlib Axes
         Axes object to draw the plot onto, otherwise uses the current Axes.
-        
+
     show : bool
         Whether ``matplotlib.pyplot.show()`` is called before returning.
         Setting this to ``False`` allows the plot
         to be customized further after it has been created.
-        
+
     Returns
     -------
     ax: matplotlib Axes
@@ -74,7 +74,7 @@ def monitoring(ind, shap_values, features, feature_names=None, ax=None, show=Tru
     for i in range(inc, len(ys) - inc, inc):
         _, pval = scipy.stats.ttest_ind(ys[:i], ys[i:])
         pvals.append(pval)
-        
+
     if len(pvals) > 0:
         min_pval = np.min(pvals)
         min_pval_ind = float(np.argmin(pvals) * inc + inc)
@@ -90,13 +90,13 @@ def monitoring(ind, shap_values, features, feature_names=None, ax=None, show=Tru
     ax.yaxis.set_ticks_position("left")
     ax.spines["right"].set_visible(False)
     ax.spines["top"].set_visible(False)
-    
+
     cb = plt.colorbar(sc, ax=ax)
     cb.outline.set_visible(False)  # type: ignore
     bbox = cb.ax.get_window_extent().transformed(ax.figure.dpi_scale_trans.inverted())
     cb.ax.set_aspect((bbox.height - 0.7) * 20)
     cb.set_label(truncate_text(feature_names[ind], 30), size=13)
-    
+
     if show:
         plt.show()
     else:
