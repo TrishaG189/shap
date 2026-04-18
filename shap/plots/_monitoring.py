@@ -14,7 +14,7 @@ def truncate_text(text, max_len):
         return text
 
 
-def monitoring(ind, shap_values, features, feature_names=None, ax=None, show=True):
+def monitoring(ind, shap_values, features, feature_names=None, show=True, *, ax=None):
     """Create a SHAP monitoring plot.
 
     (Note this function is preliminary and subject to change!!)
